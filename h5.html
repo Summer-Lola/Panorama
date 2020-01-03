@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>全景图</title>
+    <script src="./three.min.js"></script>
+    <script src="./photo-sphere-viewer.min.js"></script>
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        
+        #container {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container"></div>
+</body>
+<script>
+    //获取微信小程序传过来的全景图地址
+    var param = getParamer()
+    console.log('--param--', param)
+        //获取并处理小程序传递过来的参数
+    function getParamer() {
+        var url = window.location.href.split("?")[1]; /*获取url里"?"后面的值*/
+        if (url) { /*判断是否是一个参数还是多个参数*/
+            url = url.split("=")
+            return url[1]; /*返回想要的参数值*/
+        } else {
+            return '';
+        }
+    }
+
+    var PSV = new PhotoSphereViewer({
+        // Path to the panorama
+        panorama: param ? param : 'b.jpg', //这里放全景图地址
+
+        // Container
+        container: 'container'
+    });
+</script>
+
+</html>
